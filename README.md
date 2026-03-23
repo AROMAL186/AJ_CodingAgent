@@ -1,6 +1,6 @@
-# NVIDIA NIM Autonomous Coding Agent
+# AJ coding agent
 
-This project implements a production-oriented autonomous coding agent with a multi-agent architecture:
+This project implements the production-oriented AJ coding agent with a multi-agent architecture:
 
 - `PlannerAgent` breaks a goal into ordered, executable tasks.
 - `CoderAgent` generates code, file changes, dependencies, and validation commands.

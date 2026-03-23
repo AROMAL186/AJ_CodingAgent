@@ -1,4 +1,4 @@
-"""CLI entry point for the NVIDIA NIM autonomous coding agent."""
+"""CLI entry point for the AJ coding agent."""
 
 from __future__ import annotations
 
@@ -26,7 +26,7 @@ from tools.shell_tool import ShellTool
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run the autonomous coding agent.")
+    parser = argparse.ArgumentParser(description="Run the AJ coding agent.")
     parser.add_argument("goal", help="High-level software instruction to execute.")
     parser.add_argument(
         "--config",

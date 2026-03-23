@@ -3,9 +3,9 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "nim-coding-agent"
+name = "aj-coding-agent"
 version = "0.1.0"
-description = "Autonomous multi-agent coding system powered by NVIDIA NIM."
+description = "AJ coding agent: an autonomous multi-agent coding system powered by NVIDIA NIM."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
