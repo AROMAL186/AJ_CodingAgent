@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 import os
@@ -44,11 +44,20 @@ class MemorySettings:
 
 
 @dataclass(slots=True)
+class GuardrailsSettings:
+    enabled: bool = False
+    provider: str = "nemo"
+    config_path: Path | None = None
+    fail_closed: bool = True
+
+
+@dataclass(slots=True)
 class AppConfig:
     llm: LLMSettings
     execution: ExecutionSettings
     orchestration: OrchestrationSettings
     memory: MemorySettings
+    guardrails: GuardrailsSettings = field(default_factory=GuardrailsSettings)
 
     def with_workspace(self, workspace_root: Path) -> "AppConfig":
         return replace(
@@ -98,6 +107,7 @@ def load_config(path: str | Path) -> AppConfig:
     execution = raw.get("execution", {})
     orchestration = raw.get("orchestration", {})
     memory = raw.get("memory", {})
+    guardrails = raw.get("guardrails", {})
 
     return AppConfig(
         llm=LLMSettings(
@@ -127,5 +137,15 @@ def load_config(path: str | Path) -> AppConfig:
         memory=MemorySettings(
             path=_resolve_path(str(memory.get("path", "./memory/agent_memory.jsonl")), base_dir),
             max_recent_entries=int(memory.get("max_recent_entries", 12)),
+        ),
+        guardrails=GuardrailsSettings(
+            enabled=bool(guardrails.get("enabled", False)),
+            provider=str(guardrails.get("provider", "nemo")).strip().lower(),
+            config_path=(
+                _resolve_path(str(guardrails.get("config_path")), base_dir)
+                if guardrails.get("config_path")
+                else None
+            ),
+            fail_closed=bool(guardrails.get("fail_closed", True)),
         ),
     )

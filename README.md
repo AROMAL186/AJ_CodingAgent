@@ -69,6 +69,12 @@ export NVIDIA_API_KEY="your_api_key_here"
 python3 -m pip install -e '.[dev]'
 ```
 
+To enable real NVIDIA NeMo Guardrails integration:
+
+```bash
+python3 -m pip install -e '.[dev,nemo]'
+```
+
 ## Run
 
 ```bash
@@ -110,6 +116,26 @@ To generate into a custom workspace:
 ```bash
 python3 main.py "Build a Streamlit SQL assistant." --workspace ./runs/sql-assistant
 ```
+
+## NeMo Guardrails
+
+AJ coding agent can use the official NVIDIA NeMo Guardrails Python library as an optional chat guardrails layer.
+
+- The integration uses `nemoguardrails` through `LLMRails` and `RailsConfig.from_path(...)`.
+- A sample config is included at [guardrails/aj_coding_agent/config.yml](/Users/kazeus/Agent/guardrails/aj_coding_agent/config.yml).
+- Enable it in [config.yaml](/Users/kazeus/Agent/config.yaml) by setting `guardrails.enabled: true`.
+
+Example:
+
+```yaml
+guardrails:
+  enabled: true
+  provider: "nemo"
+  config_path: "./guardrails/aj_coding_agent"
+  fail_closed: true
+```
+
+When enabled, the planner/coder/debugger chat calls go through NeMo Guardrails before model output is used.
 
 ## Test
 

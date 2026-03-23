@@ -13,8 +13,8 @@ from agents.planner import PlannerAgent
 from agents.tool_agent import ToolAgent
 from core.config import AppConfig, load_config, load_env_file
 from core.executor import ExecutorLayer
+from core.guardrails_runtime import build_chat_client
 from core.models import RunSummary
-from core.llm import LLMClient
 from core.orchestrator import AutonomousCodingOrchestrator
 from core.tool_executor import ToolExecutor
 from memory.store import MemoryStore
@@ -46,7 +46,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def build_orchestrator(config: AppConfig) -> AutonomousCodingOrchestrator:
-    llm_client = LLMClient(config.llm)
+    llm_client = build_chat_client(config)
     shell_tool = ShellTool(
         shell=config.execution.shell,
         timeout_seconds=config.execution.command_timeout_seconds,

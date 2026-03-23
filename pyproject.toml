@@ -17,6 +17,9 @@ dependencies = [
 dev = [
   "pytest>=8.0.0,<9",
 ]
+nemo = [
+  "nemoguardrails[nvidia]>=0.20,<0.22",
+]
 
 [tool.setuptools.packages.find]
 include = ["agents", "core", "memory", "tools"]

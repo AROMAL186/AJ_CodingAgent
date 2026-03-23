@@ -1,0 +1,37 @@
+models:
+  - type: main
+    engine: nim
+    model: meta/llama-3.1-405b-instruct
+    parameters:
+      base_url: https://integrate.api.nvidia.com/v1
+      temperature: 0.2
+      max_tokens: 4096
+
+  - type: self_check_input
+    engine: nim
+    model: nvidia/llama-3.1-nemoguard-8b-content-safety
+    parameters:
+      base_url: https://integrate.api.nvidia.com/v1
+
+  - type: self_check_output
+    engine: nim
+    model: nvidia/llama-3.1-nemoguard-8b-content-safety
+    parameters:
+      base_url: https://integrate.api.nvidia.com/v1
+
+instructions:
+  - type: general
+    content: |
+      You are AJ coding agent, a production-oriented autonomous software engineering assistant.
+      Be precise, safe, and focused on code generation, testing, debugging, and validation.
+
+rails:
+  input:
+    flows:
+      - self check input
+  output:
+    flows:
+      - self check output
+
+tracing:
+  enabled: false

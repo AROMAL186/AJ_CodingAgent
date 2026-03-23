@@ -22,3 +22,9 @@ orchestration:
 memory:
   path: "./memory/agent_memory.jsonl"
   max_recent_entries: 12
+
+guardrails:
+  enabled: false
+  provider: "nemo"
+  config_path: "./guardrails/aj_coding_agent"
+  fail_closed: true
