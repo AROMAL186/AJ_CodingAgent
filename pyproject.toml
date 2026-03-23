@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nim-coding-agent"
+version = "0.1.0"
+description = "Autonomous multi-agent coding system powered by NVIDIA NIM."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "PyYAML>=6.0.1,<7",
+  "requests>=2.32.0,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0,<9",
+]
+
+[tool.setuptools.packages.find]
+include = ["agents", "core", "memory", "tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

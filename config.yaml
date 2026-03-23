@@ -1,0 +1,24 @@
+llm:
+  base_url: "https://integrate.api.nvidia.com/v1"
+  api_key_env: "NVIDIA_API_KEY"
+  model: "meta/llama-3.1-405b-instruct"
+  temperature: 0.2
+  top_p: 0.9
+  max_tokens: 4096
+  timeout_seconds: 180
+
+execution:
+  shell: "/bin/zsh"
+  command_timeout_seconds: 600
+  python_executable: "python3"
+  allow_dependency_install: true
+
+orchestration:
+  workspace_root: "./generated_workspace"
+  max_task_retries: 3
+  max_files_in_snapshot: 60
+  max_chars_per_file: 5000
+
+memory:
+  path: "./memory/agent_memory.jsonl"
+  max_recent_entries: 12
